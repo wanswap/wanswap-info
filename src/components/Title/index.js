@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Flex } from 'rebass'
-import Link from '../Link'
+// import Link from '../Link'
 import { RowFixed } from '../Row'
 // import Logo from '../../assets/logo_white.svg'
 // import Wordmark from '../../assets/wordmark_white.svg'
@@ -36,7 +36,7 @@ export default function Title() {
           {/* <UniIcon id="link" onClick={() => history.push('/')}>
             <img width={'24px'} src={Logo} alt="logo" />
           </UniIcon> */}
-          <img width={'140px'} style={{ marginLeft: '8px', marginTop: '0px' }} src={WanSwapLogo} alt="logo" />
+          <img onClick={() => history.push('/')} width={'140px'} style={{ marginLeft: '8px', marginTop: '0px' }} src={WanSwapLogo} alt="logo" />
         </RowFixed>
       </Flex>
     </TitleWrapper>
