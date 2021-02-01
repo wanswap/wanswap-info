@@ -70,9 +70,7 @@ export default function TokenLogo({ address, header = false, size = '24px', ...r
     )
   }
 
-  const path = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${isAddress(
-    address
-  )}/logo.png`
+  const path = `https://token-icons.vercel.app/tokens/${address?.toLowerCase()}.png`
 
   return (
     <Inline>
