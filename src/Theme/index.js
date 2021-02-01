@@ -11,6 +11,7 @@ export default function ThemeProvider({ children }) {
 }
 
 const theme = (darkMode, color) => ({
+
   customColor: color,
   textColor: darkMode ? color : 'black',
 
@@ -45,7 +46,7 @@ const theme = (darkMode, color) => ({
   modalBG: darkMode ? 'rgba(0,0,0,0.85)' : 'rgba(0,0,0,0.6)',
   advancedBG: darkMode ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.4)',
   onlyLight: darkMode ? '#22242a' : 'transparent',
-  divider: darkMode ? 'rgba(43, 43, 43, 0.435)' : 'rgba(43, 43, 43, 0.035)',
+  divider: darkMode ? 'rgb(255 255 255 / 8%)' : 'rgba(43, 43, 43, 0.035)',
 
   //primary colors
   primary1: darkMode ? '#2172E5' : '#ff007a',
@@ -69,7 +70,7 @@ const theme = (darkMode, color) => ({
   green1: '#27AE60',
   yellow1: '#FFE270',
   yellow2: '#F3841E',
-  link: '#2172E5',
+  link: 'rgb(33, 114, 229)',
   blue: '2f80ed',
 
   background: darkMode ? 'black' : `radial-gradient(50% 50% at 50% 50%, #ff007a30 0%, #fff 0%)`,
@@ -144,8 +145,7 @@ export const ThemedBackground = styled.div`
   max-width: 100vw !important;
   height: 200vh;
   mix-blend-mode: color;
-  background: ${({ backgroundColor }) =>
-    `radial-gradient(50% 50% at 50% 50%, ${backgroundColor} 0%, rgba(255, 255, 255, 0) 100%)`};
+  
   position: absolute;
   top: 0px;
   left: 0px;
@@ -168,7 +168,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     font-size: 14px;    
-    background-color: ${({ theme }) => theme.bg6};
+    
   }
 
   a {
@@ -177,6 +177,21 @@ export const GlobalStyle = createGlobalStyle`
     :hover {
       text-decoration: none
     }
+  }
+
+  html
+  {
+    background: url(/hexagons.png), linear-gradient(45deg, rgb(16, 114, 189) 0%, rgb(16, 114, 189) 23%, rgb(2, 41, 97) 48%, rgb(0, 4, 38) 73%, rgb(0, 0, 21) 100%);
+    background-attachment: fixed;
+  }
+  #shadow_bottom
+  {
+    background: url(/shadow_bottom.png) repeat-x;
+    width: 100%;
+    height: 860px;
+    position: fixed;
+    bottom: 0px;
+    z-index: -1;
   }
 
   

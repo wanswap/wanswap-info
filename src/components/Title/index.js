@@ -7,7 +7,7 @@ import { Flex } from 'rebass'
 import { RowFixed } from '../Row'
 // import Logo from '../../assets/logo_white.svg'
 // import Wordmark from '../../assets/wordmark_white.svg'
-import WanSwapLogo from '../../assets/wanswap-logo.png'
+import WanSwapLogo from '../../assets/Logo_Whiteyellow.svg'
 
 const TitleWrapper = styled.div`
   text-decoration: none;

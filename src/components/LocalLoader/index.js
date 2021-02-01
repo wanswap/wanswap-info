@@ -26,10 +26,20 @@ const Wrapper = styled.div`
         `}
 `
 
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`
+
+
 const AnimatedImg = styled.div`
-  animation: ${pulse} 800ms linear infinite;
+animation: 2s ${rotate} linear infinite;
   & > * {
-    width: 72px;
+    width: 120px;
   }
 `
 
@@ -39,7 +49,7 @@ const LocalLoader = ({ fill }) => {
   return (
     <Wrapper fill={fill}>
       <AnimatedImg>
-        <img width={'200px'} src={require(darkMode ? '../../assets/logo_white.png' : '../../assets/logo_dark.png')} alt="loading-icon" />
+        <img width={'200px'} src={require(darkMode ? '../../assets/loader.svg' : '../../assets/logo_dark.png')} alt="loading-icon" />
       </AnimatedImg>
     </Wrapper>
   )
