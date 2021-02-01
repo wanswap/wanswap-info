@@ -48,8 +48,7 @@ export function getPoolLink(token0Address, token1Address = null, remove = false)
     return (
       `https://uniswap.exchange/` +
       (remove ? `remove` : `add`) +
-      `/${token0Address === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2' ? 'ETH' : token0Address}/${
-        token1Address === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2' ? 'ETH' : token1Address
+      `/${token0Address === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2' ? 'ETH' : token0Address}/${token1Address === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2' ? 'ETH' : token1Address
       }`
     )
   }
@@ -59,9 +58,8 @@ export function getSwapLink(token0Address, token1Address = null) {
   if (!token1Address) {
     return `https://uniswap.exchange/swap?inputCurrency=${token0Address}`
   } else {
-    return `https://uniswap.exchange/swap?inputCurrency=${
-      token0Address === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2' ? 'ETH' : token0Address
-    }&outputCurrency=${token1Address === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2' ? 'ETH' : token1Address}`
+    return `https://uniswap.exchange/swap?inputCurrency=${token0Address === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2' ? 'ETH' : token0Address
+      }&outputCurrency=${token1Address === '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2' ? 'ETH' : token1Address}`
   }
 }
 
@@ -140,15 +138,25 @@ export async function splitQuery(query, localClient, vars, list, skipCount = 100
  * @param {Int} timestamp in seconds
  */
 export async function getBlockFromTimestamp(timestamp) {
-  let result = await blockClient.query({
-    query: GET_BLOCK,
-    variables: {
-      timestampFrom: timestamp,
-      timestampTo: timestamp + 600,
-    },
-    fetchPolicy: 'cache-first',
-  })
-  return result?.data?.blocks?.[0]?.number
+  console.log('getBlockFromTimestamp', timestamp)
+  if (timestamp.length > 0) {
+    return timestamp.map(v => {
+      return {
+        timestamp: v,
+        number: (12926528 + (v - 1612152902) / 5).toFixed(0),
+      }
+    })
+  }
+  // let result = await blockClient.query({
+  //   query: GET_BLOCK,
+  //   variables: {
+  //     timestampFrom: timestamp,
+  //     timestampTo: timestamp + 600,
+  //   },
+  //   fetchPolicy: 'cache-first',
+  // })
+  // return result?.data?.blocks?.[0]?.number
+  return (12926528 + (timestamp - 1612152902) / 5).toFixed(0)
 }
 
 /**
@@ -159,6 +167,7 @@ export async function getBlockFromTimestamp(timestamp) {
  * @param {Array} timestamps
  */
 export async function getBlocksFromTimestamps(timestamps, skipCount = 500) {
+  return getBlockFromTimestamp(timestamps);
   if (timestamps?.length === 0) {
     return []
   }
