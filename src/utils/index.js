@@ -3,8 +3,15 @@ import { BigNumber } from 'bignumber.js'
 import dayjs from 'dayjs'
 import { ethers } from 'ethers'
 import utc from 'dayjs/plugin/utc'
-import { client, blockClient } from '../apollo/client'
-import { GET_BLOCK, GET_BLOCKS, SHARE_VALUE } from '../apollo/queries'
+import {
+  client,
+  //  blockClient 
+} from '../apollo/client'
+import {
+  // GET_BLOCK,
+  //  GET_BLOCKS,
+  SHARE_VALUE
+} from '../apollo/queries'
 import { Text } from 'rebass'
 import _Decimal from 'decimal.js-light'
 import toFormat from 'toformat'
@@ -168,24 +175,24 @@ export async function getBlockFromTimestamp(timestamp) {
  */
 export async function getBlocksFromTimestamps(timestamps, skipCount = 500) {
   return getBlockFromTimestamp(timestamps);
-  if (timestamps?.length === 0) {
-    return []
-  }
+  // if (timestamps?.length === 0) {
+  //   return []
+  // }
 
-  let fetchedData = await splitQuery(GET_BLOCKS, blockClient, [], timestamps, skipCount)
+  // let fetchedData = await splitQuery(GET_BLOCKS, blockClient, [], timestamps, skipCount)
 
-  let blocks = []
-  if (fetchedData) {
-    for (var t in fetchedData) {
-      if (fetchedData[t].length > 0) {
-        blocks.push({
-          timestamp: t.split('t')[1],
-          number: fetchedData[t][0]['number'],
-        })
-      }
-    }
-  }
-  return blocks
+  // let blocks = []
+  // if (fetchedData) {
+  //   for (var t in fetchedData) {
+  //     if (fetchedData[t].length > 0) {
+  //       blocks.push({
+  //         timestamp: t.split('t')[1],
+  //         number: fetchedData[t][0]['number'],
+  //       })
+  //     }
+  //   }
+  // }
+  // return blocks
 }
 
 export async function getLiquidityTokenBalanceOvertime(account, timestamps) {
