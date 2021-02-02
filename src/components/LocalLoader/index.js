@@ -2,11 +2,11 @@ import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { useDarkModeManager } from '../../contexts/LocalStorage'
 
-const pulse = keyframes`
-  0% { transform: scale(1); }
-  60% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-`
+// const pulse = keyframes`
+//   0% { transform: scale(1); }
+//   60% { transform: scale(1.1); }
+//   100% { transform: scale(1); }
+// `
 
 const Wrapper = styled.div`
   pointer-events: none;
