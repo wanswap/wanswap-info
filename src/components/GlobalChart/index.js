@@ -8,7 +8,7 @@ import TradingViewChart, { CHART_TYPES } from '../TradingviewChart'
 import { RowFixed } from '../Row'
 import { OptionButton } from '../ButtonStyled'
 import { getTimeframe } from '../../utils'
-import { TYPE } from '../../Theme'
+// import { TYPE } from '../../Theme'
 
 const CHART_VIEW = {
   VOLUME: 'Volume',
