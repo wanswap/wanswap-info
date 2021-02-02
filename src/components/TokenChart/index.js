@@ -86,7 +86,6 @@ const TokenChart = ({ address, color, base }) => {
         frequency === DATA_FREQUENCY.DAY
           ? dailyAll
           : hourlyAll
-
   // switch to hourly data when switched to week window
   useEffect(() => {
     if (timeWindow === timeframeOptions.WEEK && prevWindow && prevWindow !== timeframeOptions.WEEK) {
@@ -110,7 +109,6 @@ const TokenChart = ({ address, color, base }) => {
   let utcStartTime = getTimeframe(timeWindow)
   const domain = [(dataMin) => (dataMin > utcStartTime ? dataMin : utcStartTime), 'dataMax']
   const aspect = below1080 ? 60 / 32 : below600 ? 60 / 42 : 60 / 22
-  console.log('chartData0', chartData);
 
   chartData = chartData?.filter((entry) => entry.date >= utcStartTime)
 
@@ -128,7 +126,6 @@ const TokenChart = ({ address, color, base }) => {
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [isClient, width]) // Empty array ensures that effect is only run on mount and unmount
-  console.log('chartData1', chartData);
   return (
     <ChartWrapper>
       {below600 ? (
@@ -211,12 +208,12 @@ const TokenChart = ({ address, color, base }) => {
               >
                 1M
             </OptionButton>
-              {/* <OptionButton
+              <OptionButton
                 active={timeWindow === timeframeOptions.ALL_TIME}
                 onClick={() => setTimeWindow(timeframeOptions.ALL_TIME)}
               >
                 All
-            </OptionButton> */}
+            </OptionButton>
             </AutoRow>
           </RowBetween>
         )}

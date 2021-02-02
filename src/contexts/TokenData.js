@@ -522,7 +522,7 @@ const getIntervalTokenData = async (tokenAddress, startTime, interval = 3600, la
     let index = 0
     for (var brow in result) {
       let timestamp = brow.split('b')[1]
-      if (timestamp) {
+      if (timestamp && result[brow]) {
         values[index].priceUSD = result[brow].ethPrice * values[index].derivedETH
         index += 1
       }
@@ -548,7 +548,6 @@ const getIntervalTokenData = async (tokenAddress, startTime, interval = 3600, la
 }
 
 const getTokenChartData = async (tokenAddress) => {
-  console.log('getTokenChartData', tokenAddress);
   let data = []
   const utcEndTime = dayjs.utc()
   let utcStartTime = utcEndTime.subtract(1, 'year')
@@ -566,7 +565,7 @@ const getTokenChartData = async (tokenAddress) => {
         },
         fetchPolicy: 'cache-first',
       })
-      console.log('result.data.tokenDayDatas', result.data.tokenDayDatas);
+
       if (result.data.tokenDayDatas.length < 1000) {
         allFound = true
       }
@@ -719,7 +718,7 @@ export function useTokenPriceData(tokenAddress, timeWindow, interval = 3600) {
     const currentTime = dayjs.utc()
     const windowSize = timeWindow === timeframeOptions.MONTH ? 'month' : 'week'
     const startTime =
-      timeWindow === timeframeOptions.ALL_TIME ? 1589760000 : currentTime.subtract(1, windowSize).startOf('hour').unix()
+      timeWindow === timeframeOptions.ALL_TIME ? 1602760000 : currentTime.subtract(1, windowSize).startOf('hour').unix()
 
     async function fetch() {
       let data = await getIntervalTokenData(tokenAddress, startTime, interval, latestBlock)
