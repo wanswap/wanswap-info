@@ -313,12 +313,15 @@ function AccountPage({ account }) {
           >
             <PositionList positions={positions} />
           </Panel>
-          <TYPE.main fontSize={'1.125rem'} style={{ marginTop: '3rem' }}>
+
+
+          <TYPE.main fontSize={'1.125rem'} style={{ marginTop: '3rem', display: 'none' }}>
             Liquidity Mining Pools
           </TYPE.main>
           <Panel
             style={{
               marginTop: '1.5rem',
+              display: 'none'
             }}
           >
             {miningPositions && <MiningPositionList miningPositions={miningPositions} />}
@@ -331,6 +334,8 @@ function AccountPage({ account }) {
               </AutoColumn>
             )}
           </Panel>
+
+
           <TYPE.main fontSize={'1.125rem'} style={{ marginTop: '3rem' }}>
             Transactions
           </TYPE.main>{' '}
