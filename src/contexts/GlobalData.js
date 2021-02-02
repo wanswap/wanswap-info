@@ -216,8 +216,6 @@ async function getGlobalData(ethPrice, oldEthPrice) {
   let oneDayData = {}
   let twoDayData = {}
 
-  console.log('getGlobalData', ethPrice, oldEthPrice, data);
-
   try {
     // get timestamps for the days
     const utcCurrentTime = dayjs()
@@ -240,7 +238,6 @@ async function getGlobalData(ethPrice, oldEthPrice) {
       fetchPolicy: 'cache-first',
     })
     data = result.data.uniswapFactories[0]
-    console.log('1', result.data);
 
     // fetch the historical data
     let oneDayResult = await client.query({
@@ -306,7 +303,6 @@ async function getGlobalData(ethPrice, oldEthPrice) {
     console.log(e)
   }
 
-  console.log('getGlobalData', data);
   return data
 }
 

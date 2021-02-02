@@ -225,88 +225,88 @@ const getTopTokens = async (ethPrice, ethPriceOld) => {
 
     let bulkResults = await Promise.all(
       current &&
-        oneDayData &&
-        twoDayData &&
-        current?.data?.tokens.map(async (token) => {
-          let data = token
+      oneDayData &&
+      twoDayData &&
+      current?.data?.tokens.map(async (token) => {
+        let data = token
 
-          // let liquidityDataThisToken = liquidityData?.[token.id]
-          let oneDayHistory = oneDayData?.[token.id]
-          let twoDayHistory = twoDayData?.[token.id]
+        // let liquidityDataThisToken = liquidityData?.[token.id]
+        let oneDayHistory = oneDayData?.[token.id]
+        let twoDayHistory = twoDayData?.[token.id]
 
-          // catch the case where token wasnt in top list in previous days
-          if (!oneDayHistory) {
-            let oneDayResult = await client.query({
-              query: TOKEN_DATA(token.id, oneDayBlock),
-              fetchPolicy: 'cache-first',
-            })
-            oneDayHistory = oneDayResult.data.tokens[0]
-          }
-          if (!twoDayHistory) {
-            let twoDayResult = await client.query({
-              query: TOKEN_DATA(token.id, twoDayBlock),
-              fetchPolicy: 'cache-first',
-            })
-            twoDayHistory = twoDayResult.data.tokens[0]
-          }
-
-          // calculate percentage changes and daily changes
-          const [oneDayVolumeUSD, volumeChangeUSD] = get2DayPercentChange(
-            data.tradeVolumeUSD,
-            oneDayHistory?.tradeVolumeUSD ?? 0,
-            twoDayHistory?.tradeVolumeUSD ?? 0
-          )
-          const [oneDayTxns, txnChange] = get2DayPercentChange(
-            data.txCount,
-            oneDayHistory?.txCount ?? 0,
-            twoDayHistory?.txCount ?? 0
-          )
-
-          const currentLiquidityUSD = data?.totalLiquidity * ethPrice * data?.derivedETH
-          const oldLiquidityUSD = oneDayHistory?.totalLiquidity * ethPriceOld * oneDayHistory?.derivedETH
-
-          // percent changes
-          const priceChangeUSD = getPercentChange(
-            data?.derivedETH * ethPrice,
-            oneDayHistory?.derivedETH ? oneDayHistory?.derivedETH * ethPriceOld : 0
-          )
-
-          // set data
-          data.priceUSD = data?.derivedETH * ethPrice
-          data.totalLiquidityUSD = currentLiquidityUSD
-          data.oneDayVolumeUSD = parseFloat(oneDayVolumeUSD)
-          data.volumeChangeUSD = volumeChangeUSD
-          data.priceChangeUSD = priceChangeUSD
-          data.liquidityChangeUSD = getPercentChange(currentLiquidityUSD ?? 0, oldLiquidityUSD ?? 0)
-          data.oneDayTxns = oneDayTxns
-          data.txnChange = txnChange
-
-          // new tokens
-          if (!oneDayHistory && data) {
-            data.oneDayVolumeUSD = data.tradeVolumeUSD
-            data.oneDayVolumeETH = data.tradeVolume * data.derivedETH
-            data.oneDayTxns = data.txCount
-          }
-
-          // update name data for
-          updateNameData({
-            token0: data,
+        // catch the case where token wasnt in top list in previous days
+        if (!oneDayHistory) {
+          let oneDayResult = await client.query({
+            query: TOKEN_DATA(token.id, oneDayBlock),
+            fetchPolicy: 'cache-first',
           })
+          oneDayHistory = oneDayResult.data.tokens[0]
+        }
+        if (!twoDayHistory) {
+          let twoDayResult = await client.query({
+            query: TOKEN_DATA(token.id, twoDayBlock),
+            fetchPolicy: 'cache-first',
+          })
+          twoDayHistory = twoDayResult.data.tokens[0]
+        }
 
-          // HOTFIX for Aave
-          if (data.id === '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9') {
-            const aaveData = await client.query({
-              query: PAIR_DATA('0xdfc14d2af169b0d36c4eff567ada9b2e0cae044f'),
-              fetchPolicy: 'cache-first',
-            })
-            const result = aaveData.data.pairs[0]
-            data.totalLiquidityUSD = parseFloat(result.reserveUSD) / 2
-            data.liquidityChangeUSD = 0
-            data.priceChangeUSD = 0
-          }
+        // calculate percentage changes and daily changes
+        const [oneDayVolumeUSD, volumeChangeUSD] = get2DayPercentChange(
+          data.tradeVolumeUSD,
+          oneDayHistory?.tradeVolumeUSD ?? 0,
+          twoDayHistory?.tradeVolumeUSD ?? 0
+        )
+        const [oneDayTxns, txnChange] = get2DayPercentChange(
+          data.txCount,
+          oneDayHistory?.txCount ?? 0,
+          twoDayHistory?.txCount ?? 0
+        )
 
-          return data
+        const currentLiquidityUSD = data?.totalLiquidity * ethPrice * data?.derivedETH
+        const oldLiquidityUSD = oneDayHistory?.totalLiquidity * ethPriceOld * oneDayHistory?.derivedETH
+
+        // percent changes
+        const priceChangeUSD = getPercentChange(
+          data?.derivedETH * ethPrice,
+          oneDayHistory?.derivedETH ? oneDayHistory?.derivedETH * ethPriceOld : 0
+        )
+
+        // set data
+        data.priceUSD = data?.derivedETH * ethPrice
+        data.totalLiquidityUSD = currentLiquidityUSD
+        data.oneDayVolumeUSD = parseFloat(oneDayVolumeUSD)
+        data.volumeChangeUSD = volumeChangeUSD
+        data.priceChangeUSD = priceChangeUSD
+        data.liquidityChangeUSD = getPercentChange(currentLiquidityUSD ?? 0, oldLiquidityUSD ?? 0)
+        data.oneDayTxns = oneDayTxns
+        data.txnChange = txnChange
+
+        // new tokens
+        if (!oneDayHistory && data) {
+          data.oneDayVolumeUSD = data.tradeVolumeUSD
+          data.oneDayVolumeETH = data.tradeVolume * data.derivedETH
+          data.oneDayTxns = data.txCount
+        }
+
+        // update name data for
+        updateNameData({
+          token0: data,
         })
+
+        // HOTFIX for Aave
+        if (data.id === '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9') {
+          const aaveData = await client.query({
+            query: PAIR_DATA('0xdfc14d2af169b0d36c4eff567ada9b2e0cae044f'),
+            fetchPolicy: 'cache-first',
+          })
+          const result = aaveData.data.pairs[0]
+          data.totalLiquidityUSD = parseFloat(result.reserveUSD) / 2
+          data.liquidityChangeUSD = 0
+          data.priceChangeUSD = 0
+        }
+
+        return data
+      })
     )
 
     return bulkResults
@@ -548,6 +548,7 @@ const getIntervalTokenData = async (tokenAddress, startTime, interval = 3600, la
 }
 
 const getTokenChartData = async (tokenAddress) => {
+  console.log('getTokenChartData', tokenAddress);
   let data = []
   const utcEndTime = dayjs.utc()
   let utcStartTime = utcEndTime.subtract(1, 'year')
@@ -565,6 +566,7 @@ const getTokenChartData = async (tokenAddress) => {
         },
         fetchPolicy: 'cache-first',
       })
+      console.log('result.data.tokenDayDatas', result.data.tokenDayDatas);
       if (result.data.tokenDayDatas.length < 1000) {
         allFound = true
       }
