@@ -100,7 +100,7 @@ export function useDarkModeManager() {
   //   [updateKey, isDarkMode]
   // )
 
-  return [isDarkMode, true]//toggleDarkMode
+  return [true, () => { }]//toggleDarkMode
 }
 
 export function usePathDismissed(path) {
