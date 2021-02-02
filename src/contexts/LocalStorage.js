@@ -89,10 +89,10 @@ export function Updater() {
 }
 
 export function useDarkModeManager() {
-  const [state,
-    // { updateKey }
-  ] = useLocalStorageContext()
-  let isDarkMode = state[DARK_MODE]
+  // const [state,
+  //   // { updateKey }
+  // ] = useLocalStorageContext()
+  // let isDarkMode = state[DARK_MODE]
   // const toggleDarkMode = useCallback(
   //   (value) => {
   //     updateKey(DARK_MODE, value === false || value === true ? value : !isDarkMode)
@@ -100,7 +100,7 @@ export function useDarkModeManager() {
   //   [updateKey, isDarkMode]
   // )
 
-  return [isDarkMode, true]//toggleDarkMode
+  return [true, () => { }]//toggleDarkMode
 }
 
 export function usePathDismissed(path) {
