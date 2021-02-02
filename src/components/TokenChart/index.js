@@ -211,12 +211,12 @@ const TokenChart = ({ address, color, base }) => {
               >
                 1M
             </OptionButton>
-              <OptionButton
+              {/* <OptionButton
                 active={timeWindow === timeframeOptions.ALL_TIME}
                 onClick={() => setTimeWindow(timeframeOptions.ALL_TIME)}
               >
                 All
-            </OptionButton>
+            </OptionButton> */}
             </AutoRow>
           </RowBetween>
         )}
