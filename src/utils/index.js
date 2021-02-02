@@ -145,7 +145,6 @@ export async function splitQuery(query, localClient, vars, list, skipCount = 100
  * @param {Int} timestamp in seconds
  */
 export async function getBlockFromTimestamp(timestamp) {
-  console.log('getBlockFromTimestamp', timestamp)
   if (timestamp.length > 0) {
     return timestamp.map(v => {
       return {

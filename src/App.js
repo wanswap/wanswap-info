@@ -101,8 +101,6 @@ function App() {
   const globalChartData = useGlobalChartData()
   const [latestBlock, headBlock] = useLatestBlocks()
 
-  console.log('globalChartData', globalChartData, Object.keys(globalChartData).length > 0, globalData);
-
   // show warning
   const showWarning = headBlock && latestBlock ? headBlock - latestBlock > BLOCK_DIFFERENCE_THRESHOLD : false
 
