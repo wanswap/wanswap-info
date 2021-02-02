@@ -39,7 +39,7 @@ const GridRow = styled.div`
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 1fr;
-  column-gap: 6px;
+  column-gap: 12px;
   align-items: start;
   justify-content: space-between;
 `

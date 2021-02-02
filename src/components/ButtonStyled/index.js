@@ -138,7 +138,7 @@ export function ButtonCustom({ children, bgColor, color, ...rest }) {
 }
 
 export const OptionButton = styled.div`
-  font-weight: bold;
+  font-weight: normal;
   width: fit-content;
   white-space: nowrap;
   padding: 6px;

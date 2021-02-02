@@ -48,7 +48,7 @@ export default function GlobalStats() {
               style={{ position: 'relative' }}
             >
               WAN Price: <Medium>{formattedEthPrice}</Medium>
-              {showPriceCard && <UniPrice />}
+              {/*showPriceCard && <UniPrice />*/}
             </TYPE.main>
           )}
 

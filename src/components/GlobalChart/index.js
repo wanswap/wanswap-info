@@ -122,14 +122,14 @@ const GlobalChart = ({ display }) => {
             active={volumeWindow === VOLUME_WINDOW.DAYS}
             onClick={() => setVolumeWindow(VOLUME_WINDOW.DAYS)}
           >
-            <TYPE.body>D</TYPE.body>
+            D
           </OptionButton>
           <OptionButton
             style={{ marginLeft: '4px' }}
             active={volumeWindow === VOLUME_WINDOW.WEEKLY}
             onClick={() => setVolumeWindow(VOLUME_WINDOW.WEEKLY)}
           >
-            <TYPE.body>W</TYPE.body>
+            W
           </OptionButton>
         </RowFixed>
       )}
