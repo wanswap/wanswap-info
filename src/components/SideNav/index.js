@@ -172,7 +172,7 @@ function SideNav({ history }) {
               </Link>
             </HeaderText>
             <HeaderText>
-              <Link href="https://github.com/wanswap/wanswap-interface/discussion" target="_blank">
+              <Link href="https://github.com/wanswap/wanswap-interface/discussions" target="_blank">
                 Discussion
               </Link>
             </HeaderText>
