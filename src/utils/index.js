@@ -149,20 +149,12 @@ export async function getBlockFromTimestamp(timestamp) {
     return timestamp.map(v => {
       return {
         timestamp: v,
-        number: (12926528 + (v - 1612152902) / 5).toFixed(0),
+        number: (13517631 + (v - 1615190817) / 5).toFixed(0),
       }
     })
   }
-  // let result = await blockClient.query({
-  //   query: GET_BLOCK,
-  //   variables: {
-  //     timestampFrom: timestamp,
-  //     timestampTo: timestamp + 600,
-  //   },
-  //   fetchPolicy: 'cache-first',
-  // })
-  // return result?.data?.blocks?.[0]?.number
-  return (12926528 + (timestamp - 1612152902) / 5).toFixed(0)
+
+  return (13517631 + (timestamp - 1615190817) / 5).toFixed(0)
 }
 
 /**
