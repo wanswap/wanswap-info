@@ -151,24 +151,22 @@ export async function splitQuery(query, localClient, vars, list, skipCount = 100
   return fetchedData
 }
 
-let cacheBlock = {};
-async function getBlockByLastBlockAndTime(timestamp) {
-  let blockNumber;
-  if (cacheBlock.time) {
-    if (Date.now() - cacheBlock.time < 10000) {
-      blockNumber = cacheBlock.blockNumber;
-    } else {
-      cacheBlock.blockNumber = await web3.eth.getBlockNumber();
-    }
-  } else {
-    cacheBlock.time = Date.now();
-    cacheBlock.blockNumber = await web3.eth.getBlockNumber();
-    blockNumber = cacheBlock.blockNumber;
-  }
+let blockNumber;
+let blockTime;
+web3.eth.getBlockNumber().then(ret => {
+  blockNumber = ret;
+  web3.eth.getBlock(ret).then(ret2 => {
+    blockTime = ret2.timestamp;
+  }).catch(err => {
+    console.error(err);
+  })
+}).catch(err => {
+  console.error(err);
+})
 
-  console.log('current block', blockNumber);
-  let block = await web3.eth.getBlock(blockNumber);
-  let timestampInBlock = block.timestamp;
+
+async function getBlockByLastBlockAndTime(timestamp) {
+  let timestampInBlock = blockTime;
   if (timestamp >= timestampInBlock) {
     return blockNumber;
   }
