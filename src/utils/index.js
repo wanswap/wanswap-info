@@ -17,6 +17,9 @@ import _Decimal from 'decimal.js-light'
 import toFormat from 'toformat'
 import { timeframeOptions } from '../constants'
 import Numeral from 'numeral'
+import Web3 from 'web3';
+
+const web3 = new Web3(new Web3.providers.HttpProvider('https://gwan-ssl.wandevs.org:56891'));
 
 // format libraries
 const Decimal = toFormat(_Decimal)
@@ -148,6 +151,21 @@ export async function splitQuery(query, localClient, vars, list, skipCount = 100
   return fetchedData
 }
 
+
+async function getBlockByLastBlockAndTime(timestamp) {
+  let blockNumber = await web3.eth.getBlockNumber();
+  console.log('current block', blockNumber);
+  let block = await web3.eth.getBlock(blockNumber);
+  let timestampInBlock = block.timestamp;
+  if (timestamp >= timestampInBlock) {
+    return blockNumber;
+  }
+
+  let sub = (timestampInBlock - timestamp) / 5;
+  console.log('block in time', timestamp, parseInt(blockNumber - sub));
+  return parseInt(blockNumber - sub);
+}
+
 /**
  * @notice Fetches first block after a given timestamp
  * @dev Query speed is optimized by limiting to a 600-second period
@@ -155,15 +173,15 @@ export async function splitQuery(query, localClient, vars, list, skipCount = 100
  */
 export async function getBlockFromTimestamp(timestamp) {
   if (timestamp.length > 0) {
-    return timestamp.map(v => {
+    return await Promise.all(timestamp.map(async v => {
       return {
         timestamp: v,
-        number: (13517631 + (v - 1615190817) / 5).toFixed(0),
+        number: await getBlockByLastBlockAndTime(v),
       }
-    })
+    }));
   }
 
-  return (13517631 + (timestamp - 1615190817) / 5).toFixed(0)
+  return await getBlockByLastBlockAndTime(timestamp);
 }
 
 /**
