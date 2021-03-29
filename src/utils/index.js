@@ -151,8 +151,8 @@ export async function splitQuery(query, localClient, vars, list, skipCount = 100
   return fetchedData
 }
 
-let blockNumber;
-let blockTime;
+let blockNumber = 13872128;
+let blockTime = 1617013065;
 web3.eth.getBlockNumber().then(ret => {
   blockNumber = ret;
   web3.eth.getBlock(ret).then(ret2 => {
@@ -167,10 +167,6 @@ web3.eth.getBlockNumber().then(ret => {
 
 async function getBlockByLastBlockAndTime(timestamp) {
   let timestampInBlock = blockTime;
-  if (timestamp >= timestampInBlock) {
-    return blockNumber;
-  }
-
   let sub = (timestampInBlock - timestamp) / 5;
   console.log('block in time', timestamp, parseInt(blockNumber - sub));
   return parseInt(blockNumber - sub);
