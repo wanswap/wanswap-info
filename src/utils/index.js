@@ -92,6 +92,15 @@ export const toNiceDate = (date) => {
   return x
 }
 
+// shorten the checksummed version of the input address to have 0x + 4 characters at start and end
+export function shortenAddress(address, chars = 4) {
+  const parsed = isAddress(address)
+  if (!parsed) {
+    throw Error(`Invalid 'address' parameter '${address}'.`)
+  }
+  return `${parsed.substring(0, chars + 2)}...${parsed.substring(42 - chars)}`
+}
+
 export const toWeeklyDate = (date) => {
   const formatted = dayjs.utc(dayjs.unix(date))
   date = new Date(formatted)
@@ -186,27 +195,27 @@ export async function getBlocksFromTimestamps(timestamps, skipCount = 500) {
   // return blocks
 }
 
-export async function getLiquidityTokenBalanceOvertime(account, timestamps) {
-  // get blocks based on timestamps
-  const blocks = await getBlocksFromTimestamps(timestamps)
+// export async function getLiquidityTokenBalanceOvertime(account, timestamps) {
+//   // get blocks based on timestamps
+//   const blocks = await getBlocksFromTimestamps(timestamps)
 
-  // get historical share values with time travel queries
-  let result = await client.query({
-    query: SHARE_VALUE(account, blocks),
-    fetchPolicy: 'cache-first',
-  })
+//   // get historical share values with time travel queries
+//   let result = await client.query({
+//     query: SHARE_VALUE(account, blocks),
+//     fetchPolicy: 'cache-first',
+//   })
 
-  let values = []
-  for (var row in result?.data) {
-    let timestamp = row.split('t')[1]
-    if (timestamp) {
-      values.push({
-        timestamp,
-        balance: 0,
-      })
-    }
-  }
-}
+//   let values = []
+//   for (var row in result?.data) {
+//     let timestamp = row.split('t')[1]
+//     if (timestamp) {
+//       values.push({
+//         timestamp,
+//         balance: 0,
+//       })
+//     }
+//   }
+// }
 
 /**
  * @notice Example query using time travel queries

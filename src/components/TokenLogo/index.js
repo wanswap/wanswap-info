@@ -41,7 +41,9 @@ export default function TokenLogo({ address, header = false, size = '28px', ...r
   if (error || BAD_IMAGES[address]) {
     return (
       <Inline>
-        <Image {...rest} alt={''} src={PlaceHolder} size={size} />
+        <span {...rest} alt={''} style={{ fontSize: size }} role="img" aria-label="face">
+          🤔
+        </span>
       </Inline>
     )
   }

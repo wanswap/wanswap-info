@@ -12,7 +12,7 @@ import { Divider } from '..'
 import { formattedNum, formattedPercent } from '../../utils'
 import { useMedia } from 'react-use'
 import { withRouter } from 'react-router-dom'
-import { OVERVIEW_TOKEN_BLACKLIST } from '../../constants'
+import { TOKEN_BLACKLIST } from '../../constants'
 import FormattedName from '../FormattedName'
 import { TYPE } from '../../Theme'
 
@@ -90,8 +90,7 @@ const ClickableText = styled(Text)`
     opacity: 0.6;
   }
   user-select: none;
-  color: ${({ theme }) => theme.text1};
-
+  color: ${({ theme }) => theme.text1} !important;
   @media screen and (max-width: 640px) {
     font-size: 0.85rem;
   }
@@ -100,7 +99,7 @@ const ClickableText = styled(Text)`
 const DataText = styled(Flex)`
   align-items: center;
   text-align: center;
-  color: ${({ theme }) => theme.text1};
+  color: ${({ theme }) => theme.text1} !important;
 
   & > * {
     font-size: 14px;
@@ -114,6 +113,7 @@ const DataText = styled(Flex)`
 const SORT_FIELD = {
   LIQ: 'totalLiquidityUSD',
   VOL: 'oneDayVolumeUSD',
+  VOL_UT: 'oneDayVolumeUT',
   SYMBOL: 'symbol',
   NAME: 'name',
   PRICE: 'priceUSD',
@@ -121,7 +121,7 @@ const SORT_FIELD = {
 }
 
 // @TODO rework into virtualized list
-function TopTokenList({ tokens, itemMax = 10 }) {
+function TopTokenList({ tokens, itemMax = 10, useTracked = false }) {
   // page state
   const [page, setPage] = useState(1)
   const [maxPage, setMaxPage] = useState(1)
@@ -144,7 +144,7 @@ function TopTokenList({ tokens, itemMax = 10 }) {
       tokens &&
       Object.keys(tokens)
         .filter((key) => {
-          return !OVERVIEW_TOKEN_BLACKLIST.includes(key)
+          return !TOKEN_BLACKLIST.includes(key)
         })
         .map((key) => tokens[key])
     )
@@ -220,7 +220,7 @@ function TopTokenList({ tokens, itemMax = 10 }) {
             fontWeight="500"
             onClick={(e) => {
               setSortedColumn(SORT_FIELD.NAME)
-              setSortDirection(sortedColumn !== SORT_FIELD.NAMe ? true : !sortDirection)
+              setSortDirection(sortedColumn !== SORT_FIELD.NAME ? true : !sortDirection)
             }}
           >
             {below680 ? 'Symbol' : 'Name'} {sortedColumn === SORT_FIELD.NAME ? (!sortDirection ? '↑' : '↓') : ''}
@@ -255,12 +255,14 @@ function TopTokenList({ tokens, itemMax = 10 }) {
           <ClickableText
             area="vol"
             onClick={(e) => {
-              setSortedColumn(SORT_FIELD.VOL)
-              setSortDirection(sortedColumn !== SORT_FIELD.VOL ? true : !sortDirection)
+              setSortedColumn(useTracked ? SORT_FIELD.VOL_UT : SORT_FIELD.VOL)
+              setSortDirection(
+                sortedColumn !== (useTracked ? SORT_FIELD.VOL_UT : SORT_FIELD.VOL) ? true : !sortDirection
+              )
             }}
           >
             Volume (24hrs)
-            {sortedColumn === SORT_FIELD.VOL ? (!sortDirection ? '↑' : '↓') : ''}
+            {sortedColumn === (useTracked ? SORT_FIELD.VOL_UT : SORT_FIELD.VOL) ? (!sortDirection ? '↑' : '↓') : ''}
           </ClickableText>
         </Flex>
         {!below1080 && (
