@@ -18,6 +18,7 @@ import toFormat from 'toformat'
 import { timeframeOptions } from '../constants'
 import Numeral from 'numeral'
 import Web3 from 'web3';
+import sleep from 'ko-sleep';
 
 const web3 = new Web3(new Web3.providers.HttpProvider('https://gwan-ssl.wandevs.org:56891'));
 
@@ -153,10 +154,12 @@ export async function splitQuery(query, localClient, vars, list, skipCount = 100
 
 let blockNumber = 13872128;
 let blockTime = 1617013065;
+let updated = false;
 web3.eth.getBlockNumber().then(ret => {
   blockNumber = ret;
   web3.eth.getBlock(ret).then(ret2 => {
     blockTime = ret2.timestamp;
+    updated = true;
   }).catch(err => {
     console.error(err);
   })
@@ -166,9 +169,12 @@ web3.eth.getBlockNumber().then(ret => {
 
 
 async function getBlockByLastBlockAndTime(timestamp) {
+  while (!updated) {
+    await sleep(1000);
+  }
   let timestampInBlock = blockTime;
   let sub = (timestampInBlock - timestamp) / 5;
-  console.log('block in time', timestamp, parseInt(blockNumber - sub));
+  console.log('block in time', timestamp, blockTime, parseInt(blockNumber - sub));
   return parseInt(blockNumber - sub);
 }
 
