@@ -39,19 +39,48 @@ const Option = styled.div`
     opacity: 1;
   }
 `
+const CustomFlex = styled.div`
+
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+
+  align-items: center;
+  display: flex;
+
+  @media screen and (max-width: 500px) {
+    flex-direction:column;
+  }
+ 
+`
+const Logo = styled.div`
+  
+  img
+  {
+    max-width:140px;
+    width:140px;
+    @media screen and (max-width: 500px) {
+      margin-bottom:20px;
+    }
+  }
+`
 
 export default function Title() {
   const history = useHistory()
   const below1080 = useMedia('(max-width: 1080px)')
 
   return (
-    <TitleWrapper onClick={() => history.push('/')}>
-      <Flex alignItems="center" style={{ justifyContent: 'space-between' }}>
+    <TitleWrapper>
+      <CustomFlex alignItems="center" style={{ justifyContent: 'space-between' }}>
         <RowFixed>
           {/* <UniIcon id="link" onClick={() => history.push('/')}>
             <img width={'24px'} src={Logo} alt="logo" />
           </UniIcon> */}
-          <img onClick={() => history.push('/')} width={'140px'} style={{ marginLeft: '8px', marginTop: '0px' }} src={WanSwapLogo} alt="logo" />
+          <Logo>
+            <BasicLink to="/home">
+              <img style={{ marginLeft: '8px', marginTop: '0px' }} src={WanSwapLogo} alt="logo" />
+            </BasicLink>
+          </Logo>
         </RowFixed>
         {below1080 && (
           <RowFixed style={{ alignItems: 'flex-end' }}>
@@ -94,7 +123,7 @@ export default function Title() {
             </BasicLink>
           </RowFixed>
         )}
-      </Flex>
+      </CustomFlex>
     </TitleWrapper>
   )
 }
