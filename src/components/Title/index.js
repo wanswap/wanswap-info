@@ -2,7 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { Flex } from 'rebass'
+// import { Flex } from 'rebass'
 // import Link from '../Link'
 import { RowFixed } from '../Row'
 // import Logo from '../../assets/logo_white.svg'
