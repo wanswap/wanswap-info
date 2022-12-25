@@ -128,7 +128,9 @@ function GlobalPage() {
           <ListOptions gap="10px" style={{ marginTop: '2rem', marginBottom: '.5rem' }}>
             <RowBetween>
               <TYPE.main fontSize={'1.125rem'}>Top Tokens</TYPE.main>
-              <CustomLink to={'/tokens'}>See All</CustomLink>
+              <CustomLink color={'#FFE400'} to={'/tokens'}>
+                See All
+              </CustomLink>
             </RowBetween>
           </ListOptions>
           <Panel style={{ marginTop: '6px', padding: '1.125rem 0 ' }}>
@@ -137,7 +139,9 @@ function GlobalPage() {
           <ListOptions gap="10px" style={{ marginTop: '2rem', marginBottom: '.5rem' }}>
             <RowBetween>
               <TYPE.main fontSize={'1rem'}>Top Pairs</TYPE.main>
-              <CustomLink to={'/pairs'}>See All</CustomLink>
+              <CustomLink color={'#FFE400'} to={'/pairs'}>
+                See All
+              </CustomLink>
             </RowBetween>
           </ListOptions>
           <Panel style={{ marginTop: '6px', padding: '1.125rem 0 ' }}>
@@ -149,7 +153,7 @@ function GlobalPage() {
             </TYPE.main>
           </span>
           <Panel style={{ margin: '1rem 0' }}>
-            <TxnList transactions={transactions} />
+            <TxnList transactions={transactions} color={'#FFE400'} />
           </Panel>
         </div>
       </ContentWrapper>

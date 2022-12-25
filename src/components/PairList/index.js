@@ -28,7 +28,7 @@ const PageButtons = styled.div`
 `
 
 const Arrow = styled.div`
-  color: ${({ theme }) => theme.primary1};
+  color: ${({ theme }) => theme.yellow3};
   opacity: ${(props) => (props.faded ? 0.3 : 1)};
   padding: 0 20px;
   user-select: none;
@@ -211,7 +211,11 @@ function PairList({ pairs, color, disbaleLinks, maxItems = 10, useTracked = fals
               a1={pairData.token1.id}
               margin={!below740}
             />
-            <CustomLink style={{ marginLeft: '20px', whiteSpace: 'nowrap' }} to={'/pair/' + pairAddress} color={color}>
+            <CustomLink
+              style={{ marginLeft: '20px', whiteSpace: 'nowrap' }}
+              to={'/pair/' + pairAddress}
+              color={'#FFE600'}
+            >
               <FormattedName
                 text={pairData.token0.symbol + '-' + pairData.token1.symbol}
                 maxCharacters={below600 ? 8 : 16}
@@ -337,7 +341,7 @@ function PairList({ pairs, color, disbaleLinks, maxItems = 10, useTracked = fals
             >
               1y Fees / Liquidity {sortedColumn === SORT_FIELD.APY ? (!sortDirection ? '↑' : '↓') : ''}
             </ClickableText>
-            <QuestionHelper text={'Based on 24hr volume annualized'} />
+            <QuestionHelper color={'#FFE600'} text={'Based on 24hr volume annualized'} />
           </Flex>
         )}
       </DashGrid>

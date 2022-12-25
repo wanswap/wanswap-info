@@ -73,7 +73,7 @@ export const ButtonLight = styled(Base)`
 
   :hover {
     background-color: ${({ color, theme }) =>
-    color ? transparentize(0.8, color) : transparentize(0.8, theme.primary1)};
+      color ? transparentize(0.8, color) : transparentize(0.8, theme.primary1)};
   }
 `
 
@@ -87,10 +87,10 @@ export function ButtonDropdown({ disabled = false, children, open, ...rest }) {
             <ChevronUp size={24} />
           </StyledIcon>
         ) : (
-            <StyledIcon>
-              <ChevronDown size={24} />
-            </StyledIcon>
-          )}
+          <StyledIcon>
+            <ChevronDown size={24} />
+          </StyledIcon>
+        )}
       </RowBetween>
     </ButtonFaded>
   )
@@ -143,9 +143,9 @@ export const OptionButton = styled.div`
   white-space: nowrap;
   padding: 6px;
   border-radius: 6px;
-  border: 1px solid ${({ theme }) => 'rgb(255, 230, 0)'};
-  background-color: ${({ active, theme }) => active && 'rgb(255, 230, 0)'};
-  color: ${({ active, theme }) => active ? 'rgb(49, 49, 49)' : 'rgb(255, 230, 0)'};
+  border: 1px solid ${({ theme }) => '#00A045'};
+  background-color: ${({ active, theme }) => active && '#00A045'};
+  color: ${({ active, theme }) => (active ? 'rgb(49, 49, 49)' : '#00A045')};
 
   :hover {
     cursor: ${({ disabled }) => !disabled && 'pointer'};

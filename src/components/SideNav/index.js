@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { AutoColumn } from '../Column'
 import Title from '../Title'
 import { BasicLink } from '../Link'
@@ -7,7 +7,10 @@ import { useMedia } from 'react-use'
 
 import { TYPE } from '../../Theme'
 import { withRouter } from 'react-router-dom'
-import { TrendingUp, List, PieChart, Disc } from 'react-feather'
+import { ReactComponent as TrendingUp } from '../../assets/TrendingUp.svg'
+import { ReactComponent as Disc } from '../../assets/Disc.svg'
+import { ReactComponent as PieChart } from '../../assets/PieChart.svg'
+import { ReactComponent as List } from '../../assets/List.svg'
 import Link from '../Link'
 import { useSessionStart } from '../../contexts/Application'
 // import { useDarkModeManager } from '../../contexts/LocalStorage'
@@ -38,8 +41,40 @@ const Option = styled.div`
   font-weight: 500;
   font-size: 14px;
   opacity: ${({ activeText }) => (activeText ? 1 : 0.6)};
-  color: ${({ theme }) => theme.white};
+  color: ${({ theme, activeText }) => (activeText ? theme.yellow3 : theme.white)};
   display: flex;
+
+  svg {
+    fill: #fff;
+  }
+
+  path {
+    fill: #fff;
+  }
+
+  circle {
+    fill: #fff;
+  }
+
+  ${({ activeText }) =>
+    activeText
+      ? css`
+          border-radius: 10px;
+          font-weight: 600;
+          color: ${({ theme }) => theme.yellow3};
+
+          svg {
+            fill: ${({ theme }) => theme.yellow3};
+          }
+          path {
+            fill: ${({ theme }) => theme.yellow3};
+          }
+          circle {
+            fill: ${({ theme }) => theme.yellow3};
+          }
+        `
+      : null}
+
   :hover {
     opacity: 1;
   }
@@ -183,7 +218,6 @@ function SideNav({ history }) {
             </HeaderText>
 
             {/*Toggle isActive={isDark} toggle={toggleDarkMode} style={{ display: 'none' }} />*/}
-
           </AutoColumn>
           {!below1180 && (
             <Polling style={{ marginLeft: '.5rem' }}>

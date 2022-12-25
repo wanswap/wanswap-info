@@ -275,7 +275,7 @@ function PairPage({ pairAddress, history }) {
                   {!!!savedPairs[pairAddress] && !below1080 ? (
                     <Hover onClick={() => addPair(pairAddress, token0.id, token1.id, token0.symbol, token1.symbol)}>
                       <StyledIcon>
-                        <PlusCircle style={{ marginRight: '0.5rem' }} />
+                        <PlusCircle style={{ marginRight: '0.5rem', color: '#FFE600' }} />
                       </StyledIcon>
                     </Hover>
                   ) : !below1080 ? (
@@ -287,10 +287,12 @@ function PairPage({ pairAddress, history }) {
                   )}
 
                   <Link external href={getPoolLink(token0?.id, token1?.id)}>
-                    <ButtonLight color={backgroundColor}>+ Add Liquidity</ButtonLight>
+                    <ButtonLight style={{ border: '1px solid #00A045' }} color={'#00A045'}>
+                      + Add Liquidity
+                    </ButtonLight>
                   </Link>
                   <Link external href={getSwapLink(token0?.id, token1?.id)}>
-                    <ButtonDark ml={!below1080 && '.5rem'} mr={below1080 && '.5rem'} color={backgroundColor}>
+                    <ButtonDark ml={!below1080 && '.5rem'} mr={below1080 && '.5rem'} color={'#00A045'}>
                       Trade
                     </ButtonDark>
                   </Link>
@@ -311,8 +313,9 @@ function PairPage({ pairAddress, history }) {
                   <TokenLogo address={token0?.id} size={'16px'} />
                   <TYPE.main fontSize={'16px'} lineHeight={1} fontWeight={500} ml={'4px'}>
                     {token0 && token1
-                      ? `1 ${formattedSymbol0} = ${token0Rate} ${formattedSymbol1} ${parseFloat(token0?.derivedETH) ? '(' + token0USD + ')' : ''
-                      }`
+                      ? `1 ${formattedSymbol0} = ${token0Rate} ${formattedSymbol1} ${
+                          parseFloat(token0?.derivedETH) ? '(' + token0USD + ')' : ''
+                        }`
                       : '-'}
                   </TYPE.main>
                 </RowFixed>
@@ -322,8 +325,9 @@ function PairPage({ pairAddress, history }) {
                   <TokenLogo address={token1?.id} size={'16px'} />
                   <TYPE.main fontSize={'16px'} lineHeight={1} fontWeight={500} ml={'4px'}>
                     {token0 && token1
-                      ? `1 ${formattedSymbol1} = ${token1Rate} ${formattedSymbol0}  ${parseFloat(token1?.derivedETH) ? '(' + token1USD + ')' : ''
-                      }`
+                      ? `1 ${formattedSymbol1} = ${token1Rate} ${formattedSymbol0}  ${
+                          parseFloat(token1?.derivedETH) ? '(' + token1USD + ')' : ''
+                        }`
                       : '-'}
                   </TYPE.main>
                 </RowFixed>
@@ -343,7 +347,14 @@ function PairPage({ pairAddress, history }) {
                 </RowFixed>
               )}
               <PanelWrapper style={{ marginTop: '1.5rem' }}>
-                <Panel style={{ height: '100%' }}>
+                <Panel
+                  style={{
+                    height: '100%',
+                    background: '#171717',
+                    boxShadow: '0px 0px 50px 0px #000000',
+                    borderRadius: '16px',
+                  }}
+                >
                   <AutoColumn gap="20px">
                     <RowBetween>
                       <TYPE.main>Total Liquidity </TYPE.main>
@@ -357,7 +368,14 @@ function PairPage({ pairAddress, history }) {
                     </RowBetween>
                   </AutoColumn>
                 </Panel>
-                <Panel style={{ height: '100%' }}>
+                <Panel
+                  style={{
+                    height: '100%',
+                    background: '#171717',
+                    boxShadow: '0px 0px 50px 0px #000000',
+                    borderRadius: '16px',
+                  }}
+                >
                   <AutoColumn gap="20px">
                     <RowBetween>
                       <TYPE.main>Volume (24hrs) </TYPE.main>
@@ -371,7 +389,14 @@ function PairPage({ pairAddress, history }) {
                     </RowBetween>
                   </AutoColumn>
                 </Panel>
-                <Panel style={{ height: '100%' }}>
+                <Panel
+                  style={{
+                    height: '100%',
+                    background: '#171717',
+                    boxShadow: '0px 0px 50px 0px #000000',
+                    borderRadius: '16px',
+                  }}
+                >
                   <AutoColumn gap="20px">
                     <RowBetween>
                       <TYPE.main>Fees (24hrs)</TYPE.main>
@@ -385,7 +410,14 @@ function PairPage({ pairAddress, history }) {
                     </RowBetween>
                   </AutoColumn>
                 </Panel>
-                <Panel style={{ height: '100%' }}>
+                <Panel
+                  style={{
+                    height: '100%',
+                    background: '#171717',
+                    boxShadow: '0px 0px 50px 0px #000000',
+                    borderRadius: '16px',
+                  }}
+                >
                   <AutoColumn gap="20px">
                     <RowBetween>
                       <TYPE.main>Pooled Tokens</TYPE.main>
@@ -419,11 +451,14 @@ function PairPage({ pairAddress, history }) {
                   style={{
                     gridColumn: below1080 ? '1' : '2/4',
                     gridRow: below1080 ? '' : '1/5',
+                    background: '#171717',
+                    boxShadow: '0px 0px 50px 0px #000000',
+                    borderRadius: '16px',
                   }}
                 >
                   <PairChart
                     address={pairAddress}
-                    color={backgroundColor}
+                    color={'#00A045'}
                     base0={reserve1 / reserve0}
                     base1={reserve0 / reserve1}
                   />
@@ -437,7 +472,7 @@ function PairPage({ pairAddress, history }) {
                   marginTop: '1.5rem',
                 }}
               >
-                {transactions ? <TxnList transactions={transactions} /> : <Loader />}
+                {transactions ? <TxnList color={'#FFE600'} transactions={transactions} /> : <Loader />}
               </Panel>
               <RowBetween style={{ marginTop: '3rem' }}>
                 <TYPE.main fontSize={'1.125rem'}>Pair Information</TYPE.main>{' '}
@@ -463,9 +498,9 @@ function PairPage({ pairAddress, history }) {
                   <Column>
                     <TYPE.main>Pair Address</TYPE.main>
                     <AutoRow align="flex-end">
-                      <TYPE.main style={{ marginTop: '.5rem' }}>
+                      <TYPE.yellow style={{ marginTop: '.5rem' }}>
                         {pairAddress.slice(0, 6) + '...' + pairAddress.slice(38, 42)}
-                      </TYPE.main>
+                      </TYPE.yellow>
                       <CopyHelper toCopy={pairAddress} />
                     </AutoRow>
                   </Column>
@@ -477,9 +512,9 @@ function PairPage({ pairAddress, history }) {
                       </RowFixed>
                     </TYPE.main>
                     <AutoRow align="flex-end">
-                      <TYPE.main style={{ marginTop: '.5rem' }}>
+                      <TYPE.yellow style={{ marginTop: '.5rem' }}>
                         {token0 && token0.id.slice(0, 6) + '...' + token0.id.slice(38, 42)}
-                      </TYPE.main>
+                      </TYPE.yellow>
                       <CopyHelper toCopy={token0?.id} />
                     </AutoRow>
                   </Column>
@@ -491,14 +526,14 @@ function PairPage({ pairAddress, history }) {
                       </RowFixed>
                     </TYPE.main>
                     <AutoRow align="flex-end">
-                      <TYPE.main style={{ marginTop: '.5rem' }} fontSize={16}>
+                      <TYPE.yellow style={{ marginTop: '.5rem' }} fontSize={16}>
                         {token1 && token1.id.slice(0, 6) + '...' + token1.id.slice(38, 42)}
-                      </TYPE.main>
+                      </TYPE.yellow>
                       <CopyHelper toCopy={token1?.id} />
                     </AutoRow>
                   </Column>
-                  <ButtonLight color={backgroundColor}>
-                    <Link color={backgroundColor} external href={'https://www.wanscan.org/address/' + pairAddress}>
+                  <ButtonLight style={{ border: '1px solid #FFE600' }} color={'#FFE600'}>
+                    <Link color={'#FFE600'} external href={'https://www.wanscan.org/address/' + pairAddress}>
                       View on Wanscan ↗
                     </Link>
                   </ButtonLight>

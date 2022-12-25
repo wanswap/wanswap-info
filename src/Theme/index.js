@@ -3,15 +3,15 @@ import { ThemeProvider as StyledComponentsThemeProvider, createGlobalStyle } fro
 import { useDarkModeManager } from '../contexts/LocalStorage'
 import styled from 'styled-components'
 import { Text } from 'rebass'
+import bg from '../assets/bg.svg'
 
 export default function ThemeProvider({ children }) {
   const [darkMode] = useDarkModeManager()
 
-  return <StyledComponentsThemeProvider theme={theme(darkMode)}>{children}</StyledComponentsThemeProvider>
+  return <StyledComponentsThemeProvider theme={theme(darkMode)}> {children} </StyledComponentsThemeProvider>
 }
 
 const theme = (darkMode, color) => ({
-
   customColor: color,
   textColor: darkMode ? color : 'black',
 
@@ -68,8 +68,10 @@ const theme = (darkMode, color) => ({
   // other
   red1: '#FF6871',
   green1: '#27AE60',
+  green2: '#00A045',
   yellow1: '#FFE270',
   yellow2: '#F3841E',
+  yellow3: '#FFE400',
   link: 'rgb(33, 114, 229)',
   blue: '2f80ed',
 
@@ -108,6 +110,10 @@ export const TYPE = {
   pink(props) {
     return <TextWrapper fontWeight={props.faded ? 400 : 600} color={props.faded ? 'text1' : 'text1'} {...props} />
   },
+
+  yellow(props) {
+    return <TextWrapper fontWeight={400} color={'yellow3'} {...props} />
+  },
 }
 
 export const Hover = styled.div`
@@ -145,7 +151,7 @@ export const ThemedBackground = styled.div`
   max-width: 100vw !important;
   height: 200vh;
   mix-blend-mode: color;
-  
+
   position: absolute;
   top: 0px;
   left: 0px;
@@ -168,7 +174,7 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     font-size: 14px;    
-    
+    overflow-y: auto;
   }
 
   a {
@@ -181,8 +187,8 @@ export const GlobalStyle = createGlobalStyle`
 
   html
   {
-    background: url(/hexagons.png), linear-gradient(45deg, rgb(16, 114, 189) 0%, rgb(16, 114, 189) 23%, rgb(2, 41, 97) 48%, rgb(0, 4, 38) 73%, rgb(0, 0, 21) 100%);
-    background-attachment: fixed;
+    background: url(${bg});
+    background-size: cover;
   }
   #shadow_bottom
   {

@@ -30,7 +30,7 @@ export const CustomLink = styled(RouterLink)`
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
-  color: ${({ color, theme }) => (color ? color : theme.link)};
+  color: ${({ color, theme }) => (color ? color : theme.yellow3)};
 
   &:visited {
     color: ${({ color, theme }) => (color ? lighten(0.1, color) : lighten(0.1, theme.link))};
