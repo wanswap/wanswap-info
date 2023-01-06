@@ -72,7 +72,7 @@ export default function TokenLogo({ address, header = false, size = '28px', ...r
     )
   }
 
-  const path = `https://token-icons.vercel.app/tokens/${address?.toLowerCase()}.png`
+  const path = `https://icons.wanswap.finance/tokens/${address?.toLowerCase()}.png`
 
   return (
     <Inline>

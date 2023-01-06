@@ -8,7 +8,7 @@ import copy from 'copy-to-clipboard'
 export function useColor(tokenAddress, token) {
   const [color, setColor] = useState('#2172E5')
   if (tokenAddress) {
-    const path = `https://token-icons.vercel.app/tokens/${tokenAddress.toLowerCase()}.png`
+    const path = `https://icons.wanswap.finance/tokens/${tokenAddress.toLowerCase()}.png`
     if (path) {
       Vibrant.from(path).getPalette((err, palette) => {
         if (palette && palette.Vibrant) {
