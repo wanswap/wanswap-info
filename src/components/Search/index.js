@@ -36,7 +36,7 @@ const Wrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  padding: 12px 16px;
+  // padding: 12px 16px;
   border-radius: 12px;
   background-color: rgb(0 16 41 / 70%);
   border-bottom-right-radius: ${({ open }) => (open ? '0px' : '12px')};
