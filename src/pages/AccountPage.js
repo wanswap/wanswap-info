@@ -101,8 +101,8 @@ function AccountPage({ account }) {
   let totalSwappedUSD = useMemo(() => {
     return transactions?.swaps
       ? transactions?.swaps.reduce((total, swap) => {
-        return total + parseFloat(swap.amountUSD)
-      }, 0)
+          return total + parseFloat(swap.amountUSD)
+        }, 0)
       : 0
   }, [transactions])
 
@@ -135,12 +135,12 @@ function AccountPage({ account }) {
   const positionValue = useMemo(() => {
     return dynamicPositions
       ? dynamicPositions.reduce((total, position) => {
-        return (
-          total +
-          (parseFloat(position?.liquidityTokenBalance) / parseFloat(position?.pair?.totalSupply)) *
-          position?.pair?.reserveUSD
-        )
-      }, 0)
+          return (
+            total +
+            (parseFloat(position?.liquidityTokenBalance) / parseFloat(position?.pair?.totalSupply)) *
+              position?.pair?.reserveUSD
+          )
+        }, 0)
       : null
   }, [dynamicPositions])
 
@@ -157,7 +157,7 @@ function AccountPage({ account }) {
   const [savedAccounts, addAccount, removeAccount] = useSavedAccounts()
   const isBookmarked = savedAccounts.includes(account)
   const handleBookmarkClick = useCallback(() => {
-    ; (isBookmarked ? removeAccount : addAccount)(account)
+    ;(isBookmarked ? removeAccount : addAccount)(account)
   }, [account, isBookmarked, addAccount, removeAccount])
 
   return (
@@ -261,7 +261,7 @@ function AccountPage({ account }) {
             </DropdownWrapper>
           )}
           {!hideLPContent && (
-            <Panel style={{ height: '100%', marginBottom: '1rem' }}>
+            <Panel style={{ height: '100%', marginBottom: '1rem', background: '#171717' }}>
               <AutoRow gap="20px">
                 <AutoColumn gap="10px">
                   <RowBetween>
@@ -273,8 +273,8 @@ function AccountPage({ account }) {
                       {positionValue
                         ? formattedNum(positionValue, true)
                         : positionValue === 0
-                          ? formattedNum(0, true)
-                          : '-'}
+                        ? formattedNum(0, true)
+                        : '-'}
                     </TYPE.header>
                   </RowFixed>
                 </AutoColumn>
@@ -294,7 +294,7 @@ function AccountPage({ account }) {
           )}
           {!hideLPContent && (
             <PanelWrapper>
-              <Panel style={{ gridColumn: '1' }}>
+              <Panel style={{ gridColumn: '1', background: '#171717' }}>
                 {activePosition ? (
                   <PairReturnsChart account={account} position={activePosition} />
                 ) : (
@@ -309,19 +309,19 @@ function AccountPage({ account }) {
           <Panel
             style={{
               marginTop: '1.5rem',
+              background: '#171717',
             }}
           >
             <PositionList positions={positions} />
           </Panel>
-
-
           <TYPE.main fontSize={'1.125rem'} style={{ marginTop: '3rem', display: 'none' }}>
             Liquidity Mining Pools
           </TYPE.main>
           <Panel
             style={{
               marginTop: '1.5rem',
-              display: 'none'
+              display: 'none',
+              background: '#171717',
             }}
           >
             {miningPositions && <MiningPositionList miningPositions={miningPositions} />}
@@ -334,14 +334,13 @@ function AccountPage({ account }) {
               </AutoColumn>
             )}
           </Panel>
-
-
           <TYPE.main fontSize={'1.125rem'} style={{ marginTop: '3rem' }}>
             Transactions
           </TYPE.main>{' '}
           <Panel
             style={{
               marginTop: '1.5rem',
+              background: '#171717',
             }}
           >
             <TxnList transactions={transactions} />
@@ -352,6 +351,7 @@ function AccountPage({ account }) {
           <Panel
             style={{
               marginTop: '1.5rem',
+              background: '#171717',
             }}
           >
             <AutoRow gap="20px">

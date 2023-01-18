@@ -470,6 +470,7 @@ function PairPage({ pairAddress, history }) {
               <Panel
                 style={{
                   marginTop: '1.5rem',
+                  background: '#171717',
                 }}
               >
                 {transactions ? <TxnList color={'#FFE600'} transactions={transactions} /> : <Loader />}
@@ -481,6 +482,7 @@ function PairPage({ pairAddress, history }) {
                 rounded
                 style={{
                   marginTop: '1.5rem',
+                  background: '#171717',
                 }}
                 p={20}
               >
