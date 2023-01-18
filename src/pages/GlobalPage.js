@@ -110,10 +110,10 @@ function GlobalPage() {
           )}
           {!below800 && (
             <GridRow>
-              <Panel style={{ height: '100%', minHeight: '300px' }}>
+              <Panel style={{ height: '100%', minHeight: '300px', background: '#171717' }}>
                 <GlobalChart display="liquidity" />
               </Panel>
-              <Panel style={{ height: '100%' }}>
+              <Panel style={{ height: '100%', background: '#171717' }}>
                 <GlobalChart display="volume" />
               </Panel>
             </GridRow>
@@ -133,7 +133,7 @@ function GlobalPage() {
               </CustomLink>
             </RowBetween>
           </ListOptions>
-          <Panel style={{ marginTop: '6px', padding: '1.125rem 0 ' }}>
+          <Panel style={{ marginTop: '6px', padding: '1.125rem 0 ', background: '#171717' }}>
             <TopTokenList tokens={allTokens} />
           </Panel>
           <ListOptions gap="10px" style={{ marginTop: '2rem', marginBottom: '.5rem' }}>
@@ -144,7 +144,7 @@ function GlobalPage() {
               </CustomLink>
             </RowBetween>
           </ListOptions>
-          <Panel style={{ marginTop: '6px', padding: '1.125rem 0 ' }}>
+          <Panel style={{ marginTop: '6px', padding: '1.125rem 0 ', background: '#171717' }}>
             <PairList pairs={allPairs} useTracked={true} />
           </Panel>
           <span>
@@ -152,7 +152,7 @@ function GlobalPage() {
               Transactions
             </TYPE.main>
           </span>
-          <Panel style={{ margin: '1rem 0' }}>
+          <Panel style={{ margin: '1rem 0', background: '#171717' }}>
             <TxnList transactions={transactions} color={'#FFE400'} />
           </Panel>
         </div>

@@ -351,6 +351,7 @@ function TokenPage({ address, history }) {
                   style={{
                     gridColumn: below1080 ? '1' : '2/4',
                     gridRow: below1080 ? '' : '1/4',
+                    background: '#171717',
                   }}
                 >
                   <TokenChart address={address} color={'#00A045'} base={priceUSD} />
@@ -374,6 +375,7 @@ function TokenPage({ address, history }) {
               style={{
                 marginTop: '1.5rem',
                 padding: '1.125rem 0 ',
+                background: '#171717',
               }}
             >
               {address && fetchedPairsList ? (
@@ -385,7 +387,7 @@ function TokenPage({ address, history }) {
             <RowBetween mt={40} mb={'1rem'}>
               <TYPE.main fontSize={'1.125rem'}>Transactions</TYPE.main> <div />
             </RowBetween>
-            <Panel rounded>
+            <Panel rounded style={{ background: '#171717' }}>
               {transactions ? <TxnList color={'#FFE600'} transactions={transactions} /> : <Loader />}
             </Panel>
             <>
@@ -396,6 +398,7 @@ function TokenPage({ address, history }) {
                 rounded
                 style={{
                   marginTop: '1.5rem',
+                  background: '#171717',
                 }}
                 p={20}
               >
