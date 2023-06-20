@@ -91,7 +91,7 @@ const TradingViewChart = ({
         rightPriceScale: {
           scaleMargins: {
             top: topScale,
-            bottom: 0,
+            bottom: 0.2,
           },
           borderVisible: false,
         },
